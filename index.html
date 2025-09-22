@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Imperium — Premium Flooring Installations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --imperium-yellow:#F8D23C; /* strong warm yellow */
+      --imperium-black:#0B0B0F;  /* rich near-black */
+      --imperium-white:#FFFFFF;
+    }
+    html,body{height:100%;}
+    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";}
+    .title-font{font-family: Montserrat, Inter, sans-serif;}
+    /* Subtle animated shine for CTAs */
+    .shine::after{
+      content:"";
+      position:absolute;
+      top:-150%;
+      left:-50%;
+      width:50%;
+      height:400%;
+      transform:rotate(25deg);
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      animation:shine 3.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes shine{
+      0%{transform:translateX(-120%) rotate(25deg);}
+      60%{transform:translateX(220%) rotate(25deg);}
+      100%{transform:translateX(220%) rotate(25deg);}
+    }
+    /* Card hover lift */
+    .lift{transition:transform .25s ease, box-shadow .25s ease;}
+    .lift:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.28);}
+    /* Reels placeholder shimmer */
+    .reel-skeleton{
+      background: linear-gradient(120deg, #1a1a1f 20%, #232329 40%, #1a1a1f 60%);
+      background-size:200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    /* Hide number input spinners for a clean look */
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number]{ -moz-appearance: textfield; }
+    /* Smooth scroll for internal links */
+    html{scroll-behavior:smooth;}
+    /* Scroll snap reels */
+    .snap-x{scroll-snap-type:x mandatory;}
+    .snap-center{scroll-snap-align:center;}
+  </style>
+</head>
+<body class="bg-[var(--imperium-black)] text-[var(--imperium-white)]">
+  <!-- Top Bar -->
+  <div class="bg-black/40 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
+      <p class="text-xs sm:text-sm opacity-80">Serving cities across Florida and nearby areas</p>
+      <div class="flex items-center gap-3">
+        <button id="callBtn" class="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-[var(--imperium-yellow)] text-black font-semibold hover:opacity-90 transition lift">Call Now</button>
+        <button id="smsBtn" class="text-xs sm:text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 transition lift">Text Us</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="relative">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-24 -left-16 w-72 h-72 rounded-full blur-3xl" style="background: radial-gradient(ellipse at center, rgba(248,210,60,.18), transparent 60%);"></div>
+      <div class="absolute -bottom-24 -right-16 w-80 h-80 rounded-full blur-3xl" style="background: radial-gradient(ellipse at center, rgba(248,210,60,.10), transparent 60%);"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-[var(--imperium-yellow)] flex items-center justify-center text-black font-extrabold title-font">I</div>
+        <div>
+          <p class="title-font text-xl sm:text-2xl font-extrabold tracking-tight">Imperium</p>
+          <p class="text-xs opacity-70 -mt-0.5">Premium Flooring Installations</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#services" class="opacity-90 hover:opacity-100">Services</a>
+        <a href="#reels" class="opacity-90 hover:opacity-100">Gallery</a>
+        <a href="#testimonials" class="opacity-90 hover:opacity-100">Reviews</a>
+        <a href="#contact" class="opacity-90 hover:opacity-100">Contact</a>
+      </nav>
+      <a href="#contact" class="relative shine inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--imperium-yellow)] text-black font-bold lift">
+        Free Estimate
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-4">
+          <span class="w-2 h-2 rounded-full bg-[var(--imperium-yellow)]"></span>
+          <span class="text-xs opacity-90">Trusted by homeowners across Florida</span>
+        </div>
+        <h1 class="title-font text-3xl sm:text-5xl font-extrabold leading-tight">
+          Floors that impress.
+          <span class="text-[var(--imperium-yellow)]">Service you can trust.</span>
+        </h1>
+        <p class="mt-4 text-white/80 text-base sm:text-lg max-w-xl">
+          Imperium delivers beautiful, long‑lasting flooring—installed cleanly, on time, and with care. We speak your language and keep everything simple.
+        </p>
+        <ul class="mt-6 grid grid-cols-2 gap-3 max-w-md">
+          <li class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">✓</span>
+            <span>Licensed & Insured</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">✓</span>
+            <span>Senior‑friendly Service</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">✓</span>
+            <span>Clear, fair pricing</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">✓</span>
+            <span>Clean job sites</span>
+          </li>
+        </ul>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#contact" class="relative shine inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[var(--imperium-yellow)] text-black font-extrabold lift">
+            Get My Free Quote
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button id="seeGallery" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 transition lift">
+            See Real Work
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <p class="mt-3 text-sm text-white/70">Fast response. Serving cities across Florida and nearby areas.</p>
+      </div>
+
+      <!-- Hero visual -->
+      <div id="heroVisual" class="relative">
+        <div class="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#1a1a1f] to-[#101014] lift" style="position:relative;">
+          <img src="foto1.jpeg" alt="Foto destaque" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;" />
+          <!-- Abstract floor pattern with SVG (default). Replace via JS if you set hero image) -->
+          <!-- SVG moved to render after the image -->
+          <svg id="heroSVG" viewBox="0 0 800 600" class="w-full h-full" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#F8D23C" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#F8D23C" stop-opacity="0.05"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="600" fill="#121217"></rect>
+            <!-- stylized plank grid -->
+            <g opacity="0.9">
+              <rect x="40" y="380" width="260" height="36" rx="6" fill="url(#g1)" />
+              <rect x="310" y="380" width="260" height="36" rx="6" fill="url(#g1)" />
+              <rect x="580" y="380" width="180" height="36" rx="6" fill="url(#g1)" />
+              <rect x="40" y="430" width="210" height="36" rx="6" fill="url(#g1)" />
+              <rect x="260" y="430" width="260" height="36" rx="6" fill="url(#g1)" />
+              <rect x="530" y="430" width="230" height="36" rx="6" fill="url(#g1)" />
+              <rect x="40" y="480" width="300" height="36" rx="6" fill="url(#g1)" />
+              <rect x="350" y="480" width="270" height="36" rx="6" fill="url(#g1)" />
+              <rect x="630" y="480" width="130" height="36" rx="6" fill="url(#g1)" />
+            </g>
+            <!-- badge -->
+            <g transform="translate(40,40)">
+              <rect width="190" height="44" rx="10" fill="#F8D23C" />
+              <text x="16" y="28" font-family="Montserrat" font-size="18" font-weight="800" fill="#0B0B0F">IMPERIUM QUALITY</text>
+            </g>
+          </svg>
+        </div>
+        <div class="absolute -bottom-6 -left-6 bg-white text-black rounded-xl px-4 py-3 shadow-xl border border-black/5">
+          <p class="title-font text-sm font-extrabold">Since 2015</p>
+          <p class="text-xs opacity-70">Thousands of square feet installed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services with Tabs -->
+  <section id="services" class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <div>
+          <h2 class="title-font text-2xl sm:text-3xl font-extrabold">Flooring Services</h2>
+          <p class="text-white/70 mt-2 max-w-2xl">From classic hardwood to modern luxury vinyl, we guide you to the best option for your home.</p>
+        </div>
+        <div class="flex items-center gap-2 p-1 rounded-full bg-white/5 border border-white/10">
+          <button data-tab="residential" class="tab-btn px-4 py-2 rounded-full text-sm font-semibold bg-[var(--imperium-yellow)] text-black">Residential</button>
+          <button data-tab="commercial" class="tab-btn px-4 py-2 rounded-full text-sm font-semibold text-white/90 hover:bg-white/10">Commercial</button>
+          <button data-tab="vinyl" class="tab-btn px-4 py-2 rounded-full text-sm font-semibold text-white/90 hover:bg-white/10">Luxury Vinyl</button>
+          <button data-tab="tile" class="tab-btn px-4 py-2 rounded-full text-sm font-semibold text-white/90 hover:bg-white/10">Tile</button>
+        </div>
+      </div>
+
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="tabContent">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TikTok-style Reels -->
+  <section id="reels" class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="title-font text-2xl sm:text-3xl font-extrabold">Before & After — Reels</h2>
+        <button id="reelsHelp" class="text-sm opacity-80 hover:opacity-100 underline">How to view</button>
+      </div>
+      <div class="relative">
+        <div id="reelsTrack" class="flex gap-6 overflow-x-auto snap-x pb-4 hide-scrollbar" style="scrollbar-width:none;">
+          <!-- Reels injected by JS -->
+          <style>
+            #reelsTrack { min-height: 200px; }
+          </style>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="title-font text-2xl sm:text-3xl font-extrabold">Happy Customers</h2>
+          <p class="text-white/70 mt-2">Real words from homeowners who love their new floors.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="prevTest" class="p-2 rounded-lg border border-white/15 hover:bg-white/10 transition" aria-label="Previous review">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="nextTest" class="p-2 rounded-lg border border-white/15 hover:bg-white/10 transition" aria-label="Next review">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div id="testTrack" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Testimonials injected by JS -->
+        </div>
+      </div>
+      <p class="text-xs text-white/60 mt-3">Demo reviews shown. Replace with your customers anytime.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <h3 class="title-font text-xl sm:text-2xl font-extrabold">Get your free quote</h3>
+          <p class="text-white/70 mt-2">Tell us a little about your project. We’ll reply fast in plain English.</p>
+          <form id="contactForm" class="mt-6 space-y-4">
+            <div>
+              <label class="block text-sm mb-1">Your Name</label>
+              <input type="text" name="name" required placeholder="John / Mary" class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm mb-1">Phone</label>
+                <input type="tel" name="phone" required placeholder="(555) 123-4567" class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
+              </div>
+              <div>
+                <label class="block text-sm mb-1">City</label>
+                <input type="text" name="city" placeholder="Orlando, Tampa, Miami..." class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm mb-1">Project Details</label>
+              <textarea name="message" required rows="4" placeholder="Type of floor, rooms, timeframe..." class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]"></textarea>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button type="submit" class="relative shine inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[var(--imperium-yellow)] text-black font-extrabold lift">
+                Send Message
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#000" stroke-width="2" stroke-linecap="round"/><path d="M22 2l-7 20-4-9-9-4 20-7z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" id="whatsBtn" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 transition lift">
+                WhatsApp Fast Chat
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-16.2 5.4L3 21l3.6-.8A9 9 0 1 1 21 12z" stroke="#fff" stroke-width="2"/><path d="M8.5 10.5c.3 1.6 2.1 3.4 3.7 3.8.7.2 1.1 0 1.4-.3l1.1-1.2c.2-.2.5-.2.8 0l1.2.8c.3.2.3.6.1.9-.7 1.1-2 1.9-3.6 1.9-2.8 0-5.8-2.9-5.8-5.7 0-1.5.7-2.9 1.8-3.6.3-.2.7-.2.9.1l.8 1.2c.2.3.2.6 0 .8l-1.2 1.1c-.2.3-.4.7-.2 1.4z" fill="#fff"/></svg>
+              </button>
+            </div>
+            <p id="formMsg" class="text-sm mt-3 text-white/80 hidden"></p>
+            <p class="text-xs text-white/60 mt-2">No obligations. We never share your info.</p>
+          </form>
+        </div>
+
+        <div class="space-y-6">
+          <div class="rounded-2xl border border-white/10 p-6 sm:p-8 bg-gradient-to-br from-[#14141a] to-[#0f0f13]">
+            <h4 class="title-font text-lg sm:text-xl font-extrabold">Why Imperium?</h4>
+            <ul class="mt-4 space-y-3">
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-md bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">1</span>
+                <div>
+                  <p class="font-semibold">We arrive on time and protect your home</p>
+                  <p class="text-white/70 text-sm">Flooring with clean edges, no mess left behind.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-md bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">2</span>
+                <div>
+                  <p class="font-semibold">Clear, friendly communication</p>
+                  <p class="text-white/70 text-sm">Simple updates and answers without jargon.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-md bg-[var(--imperium-yellow)] text-black flex items-center justify-center text-xs font-extrabold">3</span>
+                <div>
+                  <p class="font-semibold">Beautiful results that last</p>
+                  <p class="text-white/70 text-sm">Quality materials and careful installation.</p>
+                </div>
+              </li>
+            </ul>
+            <div class="mt-6 grid grid-cols-3 gap-3">
+              <div class="rounded-xl border border-white/10 bg-white/5 aspect-[4/3] reel-skeleton"></div>
+              <div class="rounded-xl border border-white/10 bg-white/5 aspect-[4/3] reel-skeleton"></div>
+              <div class="rounded-xl border border-white/10 bg-white/5 aspect-[4/3] reel-skeleton"></div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
+            <h4 class="title-font text-lg font-extrabold">Business Card</h4>
+            <p class="text-white/70 text-sm mt-2">Send your card and we’ll feature it here with your exact details and service area.</p>
+            <div class="mt-4 flex items-center gap-4">
+              <div class="w-20 h-14 rounded-lg bg-[var(--imperium-yellow)] text-black font-extrabold title-font flex items-center justify-center">I</div>
+              <div>
+                <p class="font-semibold">Imperium Flooring</p>
+                <p class="text-sm text-white/70">Serving Florida and nearby areas</p>
+              </div>
+            </div>
+            <p class="text-xs text-white/60 mt-3">Demo preview until your real card is provided.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-md bg-[var(--imperium-yellow)] text-black font-extrabold title-font flex items-center justify-center">I</div>
+        <div>
+          <p class="title-font font-extrabold">Imperium</p>
+          <p class="text-xs text-white/70">Premium Flooring Installations</p>
+        </div>
+      </div>
+      <div class="text-xs text-white/60 max-w-xl">
+        Note: Images and videos shown are placeholders for demo purposes. Replace with your real projects and reviews. We proudly serve cities across Florida and nearby areas.
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="px-3 py-2 rounded-lg border border-white/15 hover:bg-white/10 transition">Free Estimate</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =============================================================
+    // COMO COLOCAR SUAS FOTOS & VÍDEOS (bem simples):
+    // 1) HERO (foto grande do topo):
+    //    - Cole o link completo (https://...) na variável heroImageUrl abaixo.
+    //    - Exemplo: const heroImageUrl = "https://meusite.com/foto-topo.jpg";
+    // 2) REELS (galeria estilo TikTok) — VÍDEOS DO SEU COMPUTADOR:
+    //    - Crie uma pasta local para os vídeos, por exemplo: ./videos/
+    //    - Defina abaixo: const localMediaBase = "./videos/";
+    //    - Em 'reels', coloque apenas o nome do arquivo no campo file (ex: "meuVideo.mp4").
+    //      Ex: { id:"reel1", file:"obra1.mp4", label:"Before → After", desc:"Sala" }
+    //    - Você também pode usar links externos no campo media (https://...), se preferir.
+    //    - Somente um vídeo toca por vez: precisa tocar com um clique. Ao tocar um, os outros pausam.
+    // 3) DEPOIMENTOS (fotos reais de clientes):
+    //    - Em 'testimonials', adicione a foto no campo photo (https://...).
+    // Nota importante:
+    //    - Em plataformas online como o Canva, arquivos locais (./video.mp4) podem não carregar.
+    //      Para uso local no seu computador (abrindo o HTML no navegador), funciona normalmente.
+    // =============================================================
+
+    // Basic data (demo content; replace with your real info later)
+    const businessPhone = "+15551234567"; // Replace with your real number when ready
+    const whatsappNumber = "15551234567"; // Digits only for wa.me links
+
+    // HERO IMAGE SETUP
+    // To use a custom photo in the top visual, set heroImageUrl to your full image link (https://...)
+    // Example:
+    // const heroImageUrl = "https://your-site.com/your-floor.jpg";
+    // If left empty, the decorative SVG remains.
+    const heroImageUrl = "";
+
+    const tabs = {
+      residential: [
+        { id:"r1", title:"Hardwood Installation", desc:"Timeless look, expertly fitted with clean transitions.", tag:"Popular"},
+        { id:"r2", title:"Luxury Vinyl Plank", desc:"Durable, quiet, and perfect for busy homes.", tag:"Water‑resistant"},
+        { id:"r3", title:"Stairs & Trim", desc:"Seamless stairs, baseboards, and perfect finishes.", tag:"Detail work"}
+      ],
+      commercial: [
+        { id:"c1", title:"Office Flooring", desc:"Tough surfaces with a polished professional style.", tag:"Heavy‑duty"},
+        { id:"c2", title:"Retail Spaces", desc:"Beautiful floors that handle daily foot traffic.", tag:"Slip‑resistant"},
+        { id:"c3", title:"Restaurant Zones", desc:"Easy‑clean, hygienic, and long‑lasting.", tag:"Easy care"}
+      ],
+      vinyl: [
+        { id:"v1", title:"LVP/LVT Install", desc:"Modern textures with strong wear layers.", tag:"Quiet underfoot"},
+        { id:"v2", title:"Click & Glue‑down", desc:"We advise the best system for your space.", tag:"Expert advice"},
+        { id:"v3", title:"Moisture Barriers", desc:"Protects your investment for years.", tag:"Smart prep"}
+      ],
+      tile: [
+        { id:"t1", title:"Porcelain & Ceramic", desc:"Crisp lines and durable grout work.", tag:"Classic"},
+        { id:"t2", title:"Shower Walls", desc:"Clean waterproof installs built to last.", tag:"Premium"},
+        { id:"t3", title:"Backsplashes", desc:"Neat, symmetrical, and stylish finishes.", tag:"Accent"}
+      ],
+    };
+
+    // TESTIMONIALS
+    // You can attach an optional photo per person with 'photo'.
+    // Example: photo: "https://your-site.com/client1.jpg"
+    const testimonials = [
+      { id:"u1", name:"Patricia M.", city:"Orlando, FL", text:"They treated my home with care and finished early. Floors look amazing!", rating:5, photo:"" },
+      { id:"u2", name:"Robert H.", city:"Tampa, FL", text:"Clear pricing and zero mess. I wish I called Imperium sooner.", rating:5, photo:"" },
+      { id:"u3", name:"Elaine C.", city:"Sarasota, FL", text:"Perfect for seniors—patient, polite, and professional.", rating:5, photo:"" },
+      { id:"u4", name:"Luis A.", city:"Kissimmee, FL", text:"Beautiful vinyl planks and great communication.", rating:5, photo:"" },
+      { id:"u5", name:"Janet D.", city:"St. Petersburg, FL", text:"Quality work. They explained every step.", rating:5, photo:"" }
+    ];
+
+    // REELS/GALLERY SETUP
+    // Put your video/image URLs in the 'media' field below. Use a full link starting with https://
+    // Tip: You can ALSO put an image instead of video. This prototype uses a visual preview only.
+    // Example: media: "https://your-site.com/floor1.jpg"
+    // REELS/GALLERY SETUP
+    // Para VÍDEO: cole um link completo (https://...) para um .mp4, .webm ou .ogg no campo media.
+    // Importante: vídeos de pasta local (ex: ./video.mp4) não rodam aqui por limite da plataforma. Use sempre https://
+    // Exemplo: media: "https://meuservidor.com/obra1.mp4"
+    const localMediaBase = "./videos/"; // pasta local dos seus vídeos (ajuste se precisar)
+    const reels = [
+      // Use EITHER 'file' (local) OR 'media' (link https://). Se ambos existirem, 'file' tem prioridade.
+      { id:"reel1", label:"News", desc:"Living room — LVP upgrade", file:"video1.mp4", media:"", playing:false },
+      { id:"reel2", label:"Progress", desc:"Hallway transitions", file:"video2.mp4", media:"", playing:false },
+      { id:"reel3", label:"Details", desc:"Stair nosing & trim", file:"videos5.mp4", media:"", playing:false },
+      { id:"reel4", label:"Satisfaction", desc:"Client walkthrough", file:"video4.mp4", media:"", playing:false },
+    ];
+
+    // Render tabs
+    let activeTab = "residential";
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const tabContent = document.getElementById("tabContent");
+
+    function renderTab(name){
+      tabContent.innerHTML = "";
+      (tabs[name] || []).forEach(item => {
+        const card = document.createElement("div");
+        card.className = "lift rounded-2xl border border-white/10 bg-gradient-to-b from-[#14141a] to-[#0f0f13] p-6 flex flex-col";
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="w-11 h-11 rounded-lg bg-[var(--imperium-yellow)]/15 border border-white/10 flex items-center justify-center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4 21V8l8-5 8 5v13H4z" stroke="#F8D23C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 21v-7h6v7" stroke="#F8D23C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold px-2 py-1 rounded-md bg-[var(--imperium-yellow)] text-black">${item.tag}</span>
+          </div>
+          <h3 class="title-font text-lg font-extrabold mt-4">${item.title}</h3>
+          <p class="text-white/70 mt-2">${item.desc}</p>
+          <div class="mt-5 flex items-center justify-between">
+            <button class="px-3 py-2 rounded-lg border border-white/15 hover:bg-white/10 transition text-sm">Learn more</button>
+            <a href="#contact" class="px-3 py-2 rounded-lg bg-[var(--imperium-yellow)] text-black font-bold text-sm lift">Get a quote</a>
+          </div>
+        `;
+        tabContent.appendChild(card);
+      });
+    }
+
+    tabBtns.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        activeTab = btn.dataset.tab;
+        // Update buttons
+        tabBtns.forEach(b=>{
+          if(b.dataset.tab === activeTab){
+            b.classList.add("bg-[var(--imperium-yellow)]","text-black");
+            b.classList.remove("text-white/90");
+          } else {
+            b.classList.remove("bg-[var(--imperium-yellow)]","text-black");
+            b.classList.add("text-white/90");
+          }
+        });
+        renderTab(activeTab);
+      })
+    });
+
+    // Initial render
+    renderTab(activeTab);
+
+    // HERO IMAGE APPLY
+    // If heroImageUrl has a link, it will replace the SVG with your photo automatically.
+    (function applyHeroImage(){
+      if(heroImageUrl && typeof heroImageUrl === 'string'){
+        const hero = document.getElementById('heroVisual');
+        const svg = document.getElementById('heroSVG');
+        if(hero && svg){ svg.remove(); }
+        const ph = document.createElement('div');
+        ph.className = 'w-full h-full bg-center bg-cover';
+        ph.style.backgroundImage = `url("${heroImageUrl}")`;
+        hero.querySelector('.aspect-[4/3]').appendChild(ph);
+      }
+    })();
+
+    // Render reels (TikTok style placeholders with simple interactions)
+    const reelsTrack = document.getElementById("reelsTrack");
+    function renderReels(){
+      reelsTrack.innerHTML = "";
+      const allVideos = []; // manter referência de todos para pausar
+      reels.forEach(r=>{
+        const src = r.file ? (localMediaBase + r.file) : (r.media || "");
+        const hasVideo = !!src;
+        const wrap = document.createElement("div");
+        wrap.className = "snap-center shrink-0 w-[260px] sm:w-[300px]";
+        const card = document.createElement("div");
+        card.className = "relative aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 bg-black/40 lift";
+        card.innerHTML = `
+          <div class="absolute inset-0 ${hasVideo ? '' : 'reel-skeleton'}">
+            ${hasVideo ? `
+              <video class="reelVideo w-full h-full object-cover" src="${src}" playsinline muted loop preload="metadata"></video>
+            ` : ''}
+          </div>
+          <div class="absolute inset-0 p-3 flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-black/60 text-white/90 border border-white/10">${r.label}</span>
+              <span class="text-[10px] px-2 py-1 rounded-full bg-[var(--imperium-yellow)] text-black font-bold">${hasVideo ? 'Video' : 'Demo'}</span>
+            </div>
+            <div class="flex items-end justify-between gap-2">
+              <div class="bg-black/60 px-3 py-2 rounded-lg border border-white/10">
+                <p class="text-sm font-semibold">${r.desc}</p>
+                <p class="text-[10px] text-white/70">${hasVideo ? 'Tap to play/pause' : 'Add a file name'}</p>
+              </div>
+              <button aria-label="Play/Pause" class="playBtn w-12 h-12 rounded-full bg-black/60 border border-white/10 flex items-center justify-center">
+                <svg class="playIcon ${hasVideo ? '' : 'opacity-40'}" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5v14l11-7-11-7z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <svg class="pauseIcon hidden" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="#fff"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        `;
+        const videoEl = card.querySelector('.reelVideo');
+        if(videoEl){ allVideos.push(videoEl); }
+
+        // Controle: tocar um por vez
+        const btn = card.querySelector('.playBtn');
+        btn.addEventListener('click', ()=>{
+          if(!videoEl) return; // se não tem arquivo
+          const playing = !btn.querySelector('.playIcon').classList.contains('hidden');
+          if(playing){
+            // Pausa todos os outros, toca este
+            allVideos.forEach(v=>{ if(v !== videoEl){ v.pause(); v.parentElement?.querySelector?.('.pauseIcon')?.classList?.add('hidden'); v.parentElement?.querySelector?.('.playIcon')?.classList?.remove('hidden'); } });
+            videoEl.play();
+            btn.querySelector('.playIcon').classList.add('hidden');
+            btn.querySelector('.pauseIcon').classList.remove('hidden');
+          } else {
+            videoEl.pause();
+            btn.querySelector('.playIcon').classList.remove('hidden');
+            btn.querySelector('.pauseIcon').classList.add('hidden');
+          }
+        });
+
+        wrap.appendChild(card);
+        reelsTrack.appendChild(wrap);
+      });
+    }
+    renderReels();
+
+    // Testimonials render + simple carousel controls
+    const testTrack = document.getElementById("testTrack");
+    let testIndex = 0;
+    function starRow(n){
+      let s = "";
+      for(let i=0;i<n;i++){ s += "★"; }
+      return s;
+    }
+    function avatarSVG(initials){
+      return `
+        <svg viewBox="0 0 80 80" class="w-12 h-12 rounded-full border border-white/10">
+          <defs>
+            <linearGradient id="av${Math.random()}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F8D23C"/>
+              <stop offset="100%" stop-color="#A38610"/>
+            </linearGradient>
+          </defs>
+          <rect width="80" height="80" rx="40" fill="url(#av${Math.random()})"/>
+          <text x="50%" y="52%" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="28" fill="#0B0B0F">${initials}</text>
+        </svg>
+      `;
+    }
+    function avatarPhoto(url, initials){
+      // Uses image if provided; falls back to the SVG initials if the link fails or is empty
+      if(url){
+        return `<img src="${url}" alt="${initials} photo" class="w-12 h-12 rounded-full border border-white/10 object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">`;
+      }
+      return avatarSVG(initials);
+    }
+    function initialsOf(name){
+      return name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+    }
+    function renderTestimonials(){
+      testTrack.innerHTML = "";
+      const view = testimonials.slice(testIndex, testIndex+3);
+      while(view.length < 3 && testimonials.length >= 3){
+        view.push(testimonials[view.length]); // fallback if short
+      }
+      view.forEach(t=>{
+        const c = document.createElement("div");
+        c.className = "lift rounded-2xl border border-white/10 bg-gradient-to-b from-[#14141a] to-[#0f0f13] p-6 flex flex-col";
+        c.innerHTML = `
+          <div class="flex items-center gap-3">
+            ${avatarPhoto(t.photo, initialsOf(t.name))}
+            <div>
+              <p class="font-semibold">${t.name}</p>
+              <p class="text-xs text-white/70">${t.city}</p>
+            </div>
+          </div>
+          <p class="mt-4 text-white/90">“${t.text}”</p>
+          <div class="mt-4 text-[var(--imperium-yellow)]">${starRow(t.rating)}</div>
+        `;
+        testTrack.appendChild(c);
+      });
+    }
+    renderTestimonials();
+
+    document.getElementById("prevTest").addEventListener("click", ()=>{
+      testIndex = (testIndex - 1 + testimonials.length) % testimonials.length;
+      renderTestimonials();
+    });
+    document.getElementById("nextTest").addEventListener("click", ()=>{
+      testIndex = (testIndex + 1) % testimonials.length;
+      renderTestimonials();
+    });
+
+    // Top actions
+    document.getElementById("seeGallery").addEventListener("click", ()=>{
+      document.querySelector("#reels").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    // Contact form handling (no navigation)
+    const contactForm = document.getElementById("contactForm");
+    const formMsg = document.getElementById("formMsg");
+    contactForm.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(contactForm).entries());
+      // simple required check
+      if(!data.name || !data.phone || !data.message){
+        formMsg.textContent = "Please fill name, phone, and message.";
+        formMsg.classList.remove("hidden");
+        formMsg.style.color = "#F8D23C";
+        return;
+      }
+      // Simulated success
+      formMsg.textContent = "Thanks! Your message has been received. We’ll reach out shortly.";
+      formMsg.classList.remove("hidden");
+      formMsg.style.color = "#A7F3D0";
+      contactForm.reset();
+    });
+
+    // Phone & SMS buttons - open in new tabs to avoid iframe navigation
+    document.getElementById("callBtn").addEventListener("click", ()=>{
+      window.open(`tel:${businessPhone}`, "_blank");
+    });
+    document.getElementById("smsBtn").addEventListener("click", ()=>{
+      window.open(`sms:${businessPhone}`, "_blank");
+    });
+    document.getElementById("whatsBtn").addEventListener("click", ()=>{
+      const msg = encodeURIComponent("Hello Imperium! I'd like a free flooring estimate.");
+      window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, "_blank");
+    });
+
+    // Reels help
+    document.getElementById("reelsHelp").addEventListener("click", ()=>{
+      alert("Swipe sideways to browse. Tap the round button on each reel to play/pause the preview.");
+    });
+
+    // Accessibility: hide scrollbars visually in supported browsers
+    const style = document.createElement('style');
+    style.innerHTML = `.hide-scrollbar::-webkit-scrollbar{display:none;}`;
+    document.head.appendChild(style);
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9831c28ba68ff173',t:'MTc1ODU0MzY2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
