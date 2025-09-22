@@ -263,15 +263,9 @@
               <label class="block text-sm mb-1">Your Name</label>
               <input type="text" name="name" required placeholder="John / Mary" class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
             </div>
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm mb-1">Phone</label>
-                <input type="tel" name="phone" required placeholder="(555) 123-4567" class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
-              </div>
-              <div>
-                <label class="block text-sm mb-1">City</label>
-                <input type="text" name="city" placeholder="Orlando, Tampa, Miami..." class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
-              </div>
+            <div>
+              <label class="block text-sm mb-1">City</label>
+              <input type="text" name="city" placeholder="Orlando, Tampa, Miami..." class="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:outline-none focus:border-[var(--imperium-yellow)]" />
             </div>
             <div>
               <label class="block text-sm mb-1">Project Details</label>
@@ -665,9 +659,9 @@
     contactForm.addEventListener("submit", (e)=>{
       e.preventDefault();
       const data = Object.fromEntries(new FormData(contactForm).entries());
-      // simple required check
-      if(!data.name || !data.phone || !data.message){
-        formMsg.textContent = "Please fill name, phone, and message.";
+      // simple required check (sem telefone)
+      if(!data.name || !data.message){
+        formMsg.textContent = "Please fill name and message.";
         formMsg.classList.remove("hidden");
         formMsg.style.color = "#F8D23C";
         return;
